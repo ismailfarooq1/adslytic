@@ -1,3 +1,12 @@
+## Project Information
+
+This project is initialized using Laravel v10 - JetStream with Livewire + Blade template which uses TailWindCSS.
+
+
+## Developers
+- ismaeelfarooq53@gmail.com
+- mamoonashuja2512@gmail.com
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -64,7 +73,3 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
-## Project Information
-
-This project is initialized using Laravel JetStream with Livewire + Blade template which uses TailWindCSS.
