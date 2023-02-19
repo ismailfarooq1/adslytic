@@ -1,5 +1,6 @@
 <?php
 
+use App\Enum\UserType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +18,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('oauth_token')->nullable();
+            $table->enum("user_type" , [
+                UserType::ADMIN->value,
+                UserType::CUSTOMER->value,
+            ])->default(UserType::CUSTOMER->value);
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();

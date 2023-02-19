@@ -9,7 +9,15 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-
+/**
+ * The attributes that are mass assignable.
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property string $oauth_token
+ * @property string $user_type
+ */
 class User extends Authenticatable
 {
     use HasApiTokens;
