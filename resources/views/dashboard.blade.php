@@ -88,6 +88,6 @@
                 </div>
             </div>
     @else
-                <button class="btn btn-primary">Connect Google Ad Sense Account</button>
+                <a href="{{route('get-token')}}" class="bg-blue-500 p-3 text-white rounded">Connect Google Ad Sense Account</a>
     @endif
 </x-app-layout>
