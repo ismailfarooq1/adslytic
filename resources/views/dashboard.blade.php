@@ -1,6 +1,14 @@
 <x-app-layout>
             <h1 class="text-3xl text-black pb-6">Dashboard</h1>
-            @if(!is_null(\Illuminate\Support\Facades\Auth::user()->oauth_token))
+            @if(
+                (\Illuminate\Support\Facades\Auth::user()->oauth_token != ""||
+                !is_null(\Illuminate\Support\Facades\Auth::user()->oauth_token)
+                )
+                &&(
+                Auth::user()->customer_id != null
+                || !is_null(Auth::user()->customer_id)
+                )
+                )
             <div class="flex flex-wrap mt-6">
                 <div class="w-full lg:w-1/2 pr-0 lg:pr-2">
                     <p class="text-xl pb-3 flex items-center">
@@ -88,6 +96,13 @@
                 </div>
             </div>
     @else
-                <a href="{{route('get-token')}}" class="bg-blue-500 p-3 text-white rounded">Connect Google Ad Sense Account</a>
+                @if(
+                \Illuminate\Support\Facades\Auth::user()->oauth_token == ""
+                || is_null(\Illuminate\Support\Facades\Auth::user()->oauth_token)
+                )
+                    <a href="{{route('get-token')}}" class="bg-blue-500 p-3 text-white rounded">Connect Google Ad Sense Account</a>
+                @else
+                    <a href="{{route('get-customer-id')}}" class="bg-blue-500 p-3 text-white rounded">Get Data</a>
+                @endif
     @endif
 </x-app-layout>

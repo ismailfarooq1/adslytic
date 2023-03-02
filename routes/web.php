@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get("oauth-access" , [OAuthController::class , "generateToken"])->name('get-token');
     Route::get("getToken" , [OAuthController::class , "getToken"])->name('get-token-code');
+    Route::get("getCustomerId" , [OAuthController::class , "getCustomerId"])->name('get-customer-id');
 });
 
 require __DIR__.'/auth.php';

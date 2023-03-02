@@ -16,6 +16,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $name
  * @property string $email
  * @property string $oauth_token
+ * @property string $refresh_token
+ * @property string $customer_id
  * @property string $user_type
  */
 class User extends Authenticatable
@@ -31,12 +33,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
-
+    protected $fillable = [];
+    protected $guarded = [];
     /**
      * The attributes that should be hidden for serialization.
      *

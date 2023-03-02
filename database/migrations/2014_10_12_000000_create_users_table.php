@@ -18,7 +18,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('oauth_token')->nullable();
+            $table->json('oauth_token')->nullable();
+            $table->json('refresh_token')->nullable();
+            $table->string('customer_id')->nullable();
             $table->enum("user_type" , [
                 UserType::ADMIN->value,
                 UserType::CUSTOMER->value,

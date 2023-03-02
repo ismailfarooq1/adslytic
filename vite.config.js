@@ -8,7 +8,6 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
-                '@fortawesome/fontawesome-free/css/' // add the Font Awesome CSS file here
             ],
             refresh: true,
         }),
