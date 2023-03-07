@@ -15,7 +15,7 @@ interface OAuthContract
 
     public function setToken(Auth|User $user): void;
 
-    public function refreshToken(): void;
+    public function refreshToken(User|Auth $user): void;
 
     public function getCustomerId(Auth|User $user);
 }

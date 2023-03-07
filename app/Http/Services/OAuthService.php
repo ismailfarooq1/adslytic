@@ -25,7 +25,9 @@ class OAuthService implements OAuthContract
         $this->googleClient->setScopes([
             'https://www.googleapis.com/auth/adwords',
         ]);
+        $this->googleClient->setAccessType("offline");
         $this->googleClient->setApprovalPrompt('force');
+        $this->googleClient->setPrompt('consent');
     }
 
     /**
@@ -64,7 +66,7 @@ class OAuthService implements OAuthContract
     /**
      * @return void
      */
-    public function refreshToken(): void{
+    public function refreshToken(User|Auth $user): void{
         /** @var User $user */
         $user = Auth::user();
         $this->setToken($user);
@@ -86,21 +88,25 @@ class OAuthService implements OAuthContract
             $this->googleClient->setAccessToken($accessToken);
 
             // save to file
+            $accessTokenUpdated['type'] = 'authorized_user';
+            $accessTokenUpdated['client_id'] = $user->id; // Add the client ID here
 
+            $user->oauth_token = $accessTokenUpdated;
+            $user->update();
             Storage::disk('local')->put(UserPaths::JSON->value , json_encode($accessTokenUpdated));
         }
     }
 
     public function getCustomerId(Auth|User $user){
-//        dd(env('GOOGLE_CLIENT_SECRET'));
+
+        $this->refreshToken($user);
         $token = json_decode($user->oauth_token, true);
-//        dd($token);
         $token['client_secret'] = env('GOOGLE_CLIENT_SECRET');
         $credentials = CredentialsLoader::makeCredentials([], $token);
         // Create a Google Ads API client with the loaded credentials
-        $googleAdsClient = (new GoogleAdsClientBuilder())->withOAuth2Credential($credentials)->build();
-
-
+        $googleAdsClient = (new GoogleAdsClientBuilder())
+            ->withDeveloperToken(env('GOOGLE_DEVELOPER_KEY'))
+            ->withOAuth2Credential($credentials)->build();
         // Get the customer service client and fetch the first accessible customer's ID
         $customerServiceClient = $googleAdsClient->getCustomerServiceClient();
         $customerId = $customerServiceClient->listAccessibleCustomers()->getResourceNames()[0];

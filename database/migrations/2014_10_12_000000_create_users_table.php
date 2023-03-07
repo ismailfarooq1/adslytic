@@ -19,8 +19,13 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->json('oauth_token')->nullable();
-            $table->json('refresh_token')->nullable();
+            $table->string('refresh_token')->nullable();
             $table->string('customer_id')->nullable();
+            $table->string('clicks')->nullable();
+            $table->string('cost_micros')->nullable();
+            $table->string('impressions')->nullable();
+            $table->string('conversions')->nullable();
+            $table->string('all_conversions')->nullable();
             $table->enum("user_type" , [
                 UserType::ADMIN->value,
                 UserType::CUSTOMER->value,
